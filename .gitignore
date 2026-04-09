@@ -1,0 +1,5 @@
+node_modules/
+.DS_Store
+*.py
+*.xlsx
+# Solo si no quieres subir el excel original

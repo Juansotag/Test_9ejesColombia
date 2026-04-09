@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test 9 Ejes Colombia</title>
+    <meta name="description" content="Descubre qué candidato se alinea mejor con tus valores y propuestas.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Main Landing -->
+        <div id="landing" class="glass-card animate-in">
+            <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 2rem;">
+                <h1>Test 9 Ejes Colombia</h1>
+            </div>
+
+            <p class="description landing-text">
+                Esto es <strong>Test 9 Ejes Colombia</strong>. Este es el primer caso de uso de un test de alineación
+                ideológica dirigido al contexto colombiano.
+                Al final, obtendrás tu <strong>perfil ideológico</strong>: un resultado honesto sobre
+                qué posturas tienes sobre los temas más discutidos en el país.
+            </p>
+
+            <ul class="landing-list">
+                <li><strong>1. Tú participas:</strong> Respondes preguntas sobre temas clave de la política colombiana
+                    desde tu perspectiva.</li>
+                <li><strong>2. El algoritmo:</strong> Nuestro algoritmo asigna tus respuestas a un valor en 9 distintas
+                    dimensiones que construyen tu perfil ideológico.</li>
+                <li><strong>3. Tu perfil:</strong> Obtienes un mapeo detallado que te dará tu perfil ideológico.</li>
+            </ul>
+            <div style="display: flex; gap: 1rem; flex-direction: column; margin-bottom: 2.5rem;">
+                <button id="start-btn" class="btn">Empezar Test</button>
+                <button id="view-answers-btn" class="btn secondary hidden">Conoce qué responden los líderes</button>
+            </div>
+        </div>
+
+        <!-- Answers Screen -->
+        <div id="answers-screen" class="glass-card hidden">
+            <div class="header-row">
+                <h1>Conoce a tu líder</h1>
+                <button id="back-to-landing-btn" class="btn-small">Volver</button>
+            </div>
+
+            <div id="candidates-grid" class="candidates-grid">
+                <!-- Candidate selections will be here -->
+            </div>
+
+            <div id="candidate-detail-view" class="hidden">
+                <div class="candidate-header">
+                    <img id="detail-photo" src="" class="candidate-photo-large">
+                    <div class="detail-name-party">
+                        <h2 id="detail-name">Nombre</h2>
+                        <p id="detail-party" style="margin-bottom: 8px;">Partido</p>
+                        <div id="detail-profile"></div>
+                    </div>
+                </div>
+                <a id="campaign-url-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn-campaign hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        style="flex-shrink:0">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="2" y1="12" x2="22" y2="12" />
+                        <path
+                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                    </svg>
+                    <span>Página de campaña</span>
+                </a>
+                <div id="candidate-profile-text" class="candidate-profile-text">
+                    <!-- Profile text injected here -->
+                </div>
+                <div id="answers-list" class="answers-list-detail">
+                    <!-- Answers list injected here -->
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Name Screen -->
+        <div id="name-screen" class="glass-card hidden">
+            <h1>Antes de empezar...</h1>
+            <p class="description">¿Cuál es tu nombre?</p>
+            <div class="name-input-group">
+                <input type="text" id="name-input" class="name-input" placeholder="Escribe tu nombre aquí"
+                    maxlength="80" autocomplete="given-name" />
+                <button id="name-continue-btn" class="btn" disabled>Continuar →</button>
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="glass-card hidden">
+            <span class="question-counter" id="counter">Pregunta 1 de 30</span>
+            <div class="progress-container">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+
+            <div id="question-container">
+                <span id="context" class="context-tag">Contexto</span>
+                <h2 id="question-text" class="question-text">¿Qué opinas sobre...?</h2>
+
+                <div id="options" class="options-container">
+                    <!-- Options will be injected here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="glass-card hidden">
+            <h1 id="results-title">Tu Perfil Ideológico</h1>
+            <p id="results-subtitle" class="description">Basado en tus respuestas, estas son tus posturas en los
+                diferentes ejes:</p>
+
+            <div id="user-profile-axes" class="axes-comparison glass-card"
+                style="margin-bottom: 2.5rem; display: flex; flex-direction: column; gap: 0.25rem; padding: 1.5rem; background: rgba(255, 255, 255, 0.03); border-radius: 16px; border: 1px solid var(--glass-border);">
+                <!-- User profile axes injected here -->
+            </div>
+
+            <details class="axis-explanations glass-card"
+                style="margin-bottom: 2rem; padding: 1.25rem 1.5rem; background: rgba(255, 255, 255, 0.03); border-radius: 16px; border: 1px solid var(--glass-border); cursor: pointer; outline: none;">
+                <summary
+                    style="color: var(--primary); font-size: 1.1rem; font-weight: 600; list-style-position: inside; user-select: none;">
+                    Diccionario de Ejes (Ver significado)
+                </summary>
+                <div style="margin-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1.5rem;">
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">La política colombiana
+                        es compleja. Aquí explicamos cómo medimos tus posturas y las de los líderes en cada dimensión:
+                    </p>
+
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 0.75rem; font-size: 0.85rem;">
+                        <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                            <strong style="color: var(--primary);">1. Económico:</strong>
+                            <span style="color: #cbd5e1;"><i>Intervencionismo</i> (Defensa de subsidios amplios,
+                                empresas estatales, control de tarifas y aumento de impuestos a la riqueza) vs <i>Libre
+                                    Mercado</i> (El empresariado privado como motor de empleo, reducción de carga
+                                tributaria y defensa irrestricta de la propiedad privada empresarial).</span>
+                        </div>
+                        <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                            <strong style="color: var(--primary);">2. Seguridad:</strong>
+                            <span style="color: #cbd5e1;"><i>Progresismo</i> (Enfoque en causas estructurales del
+                                delito, resocialización y negociación política con grupos armados como en la Paz Total)
+                                vs <i>Punitivismo</i> (Mano dura, aumento de Fuerza Pública, sometimiento militar a
+                                grupos armados y penas de cárcel severas).</span>
+                        </div>
+                        <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                            <strong style="color: var(--primary);">3. Moral:</strong>
+                            <span style="color: #cbd5e1;"><i>Neutralidad</i> (Defensa estricta del Estado laico, respeto
+                                total al libre desarrollo de la personalidad, derechos reproductivos como el aborto y
+                                eutanasia) vs <i>Moralidad</i> (La política pública debe proteger los valores
+                                tradicionales cristianos, la concepción clásica de familia).</span>
+                        </div>
+                        <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                            <strong style="color: var(--primary);">4. Cultural:</strong>
+                            <span style="color: #cbd5e1;"><i>Progresismo</i> (Apertura al activismo de la diversidad,
+                                educación sexual integral y enfoques diferenciales identitarios) vs
+                                <i>Conservadurismo</i> (Preservación de los símbolos patrios, fuerte rechazo a lo que
+                                consideran 'ideología de género' y delegar la educación valorativa exclusivamente a la
+                                familia).</span>
+                        </div>
+                        <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                            <strong style="color: var(--primary);">5. Ambiental:</strong>
+                            <span style="color: #cbd5e1;"><i>Ambientalismo</i> (Transición energética acelerada, cese de
+                                nueva exploración de hidrocarburos y prohibición absoluta del fracking) vs
+                                <i>No-Ambientalismo / Desarrollismo</i> (Priorizar la soberanía fiscal mediante la
+                                exportación de petróleo y carbón, permitiendo y fomentando la minería como base de la
+                                economía).</span>
+                        </div>
+                        <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                            <strong style="color: var(--primary);">6. Internacional:</strong>
+                            <span style="color: #cbd5e1;"><i>Soberanismo</i> (Proteccionismo del agro colombiano,
+                                renegociar TLCs y desconfianza frente a las imposiciones económicas extranjeras) vs
+                                <i>Cosmopolitismo</i> (Inserción activa en el mercado global, priorización de la
+                                Inversión Extranjera Directa y alianzas estrechas con potencias como Estados
+                                Unidos).</span>
+                        </div>
+                        <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                            <strong style="color: var(--primary);">7. Liderazgo:</strong>
+                            <span style="color: #cbd5e1;"><i>Dogmatismo</i> (Convicciones verticales, lealtad estricta a
+                                liderazgos particulares, uso constante de la movilización popular y discursos de
+                                resistencia) vs <i>Pragmatismo</i> (Un estilo gerencial, enfocado en concertar técnica y
+                                burocráticamente con opositores, huyendo de las estridencias políticas).</span>
+                        </div>
+                        <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                            <strong style="color: var(--primary);">8. Institucional:</strong>
+                            <span style="color: #cbd5e1;"><i>Institucionalidad</i> (Defensa férrea de pesos y
+                                contrapesos constitucionales de 1991, respeto estricto a las Cortes y entes de control)
+                                vs <i>Ruptura</i> (Creencia de que las instituciones actuales están secuestradas por las
+                                élites, proponiendo constituyentes o reformas estructurales radicales al Estado).</span>
+                        </div>
+                        <div style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                            <strong style="color: var(--primary);">9. Política social:</strong>
+                            <span style="color: #cbd5e1;"><i>Universalismo</i> (El Estado debe administrar directamente
+                                los sistemas vitales como Salud, Educación y Pensiones para todos por igual, apartando
+                                lo privado) vs <i>Focalización</i> (Sistemas mixtos donde convive lo público -Sisbén- y
+                                lo privado -EPS/AFP-, reservando la asistencia directa del Estado solo a los más
+                                vulnerables).</span>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <div style="display: flex; justify-content: center; margin-top: 2rem; margin-bottom: 1rem;">
+                <button id="btn-show-leaders" class="btn secondary" style="width: auto;">Ver líderes similares</button>
+            </div>
+
+            <div id="secondary-results-container" style="display: none;">
+                <div class="secondary-results-header"
+                    style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--glass-border);">
+                    <h3 style="font-size: 1.5rem; color: var(--primary); text-align: center; margin-bottom: 0.5rem;">
+                        Líderes con afinidad</h3>
+                    <p class="description" style="font-size: 0.95rem; margin-bottom: 1.5rem;">Estos líderes tienen
+                        posturas similares a las tuyas en varios ejes:</p>
+                </div>
+
+                <div id="results-list" class="results-list secondary-list"
+                    style="opacity: 0.9; transform: scale(0.98);">
+                    <!-- Results will be injected here -->
+                </div>
+            </div>
+
+            <!-- Tarjeta oculta para screenshot -->
+            <div id="share-card" aria-hidden="true"
+                style="display: none; width: 480px; background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%); padding: 2rem; font-family: 'Inter', sans-serif; color: #f8fafc; border-radius: 20px;">
+                <div
+                    style="display: flex; flex-direction: column; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.15); padding-bottom: 1rem;">
+                    <span class="share-card-logo"
+                        style="margin-bottom: 0.8rem; font-size: 1.1rem; font-weight: 700; color: #60a5fa;">
+                        Test 9 Ejes Colombia</span>
+                </div>
+                <p id="share-card-title" class="share-card-user-title"
+                    style="font-size: 1.05rem; font-weight: 600; margin: 0 0 1rem 0; color: #f8fafc;"></p>
+                <div id="share-card-candidates" class="share-card-candidates"
+                    style="display: flex; flex-direction: column; gap: 0.75rem;"></div>
+                <div
+                    style="display: flex; flex-direction: column; align-items: center; margin-top: 1.2rem; padding-top: 0.8rem; border-top: 1px solid rgba(255, 255, 255, 0.12);">
+                    <p class="share-card-cta"
+                        style="font-weight: bold; font-size: 1.1rem; color: #60a5fa; margin: 0 0 0.5rem 0;">
+                        Descubre tu perfil ideológico</p>
+                    <p style="font-size: 0.75rem; color: #94a3b8; margin: 0;">Creado por Juan Sotelo Aguilar</p>
+                </div>
+            </div>
+
+
+            <!-- Botones de compartir -->
+            <div class="share-section">
+                <p class="share-section-label"> Comparte tus resultados</p>
+                <div class="share-buttons">
+                    <button id="btn-share-native" class="btn-share btn-share-native"
+                        style="width: 100%; margin-bottom: 0.5rem; justify-content: center; font-size: 1rem; padding: 0.8rem;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="18" cy="5" r="3" />
+                            <circle cx="6" cy="12" r="3" />
+                            <circle cx="18" cy="19" r="3" />
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                        </svg>
+                        Compartir link
+                    </button>
+                    <button id="btn-download" class="btn-share btn-share-download">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        Imagen
+                    </button>
+                    <button id="btn-twitter" class="btn-share btn-share-twitter"
+                        style="background: #000; color: #fff; border-color: #000;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                        X
+                    </button>
+                    <button id="btn-facebook" class="btn-share"
+                        style="background: #1877F2; color: #fff; border-color: #1877F2;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                        </svg>
+                        Facebook
+                    </button>
+                    <button id="btn-instagram" class="btn-share"
+                        style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: #fff; border: none;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.266.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.848 0-3.204.012-3.584.07-4.849.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069v-.001zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073v.001zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                        </svg>
+                        Instagram
+                    </button>
+                    <button id="btn-whatsapp" class="btn-share"
+                        style="background: #25D366; color: #fff; border-color: #25D366;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                        </svg>
+                        WhatsApp
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sección de comentarios -->
+            <div class="feedback-section">
+                <h3 class="feedback-title"> Comparte tu opinión</h3>
+                <p class="feedback-subtitle">¿Qué te pareció el test? ¿Tienes algún comentario, crítica o sugerencia?
+                </p>
+                <textarea id="feedback-text" class="feedback-textarea" placeholder="Escribe tu comentario aquí..."
+                    rows="4"></textarea>
+                <div class="feedback-actions">
+                    <span id="feedback-char-count" class="feedback-char-count">0 / 200 palabras</span>
+                    <button id="feedback-submit-btn" class="btn-feedback">Enviar comentario</button>
+                </div>
+                <p id="feedback-status" class="feedback-status"></p>
+            </div>
+
+            <button id="restart-btn" class="btn" style="margin-top: 1.5rem;">Repetir Test</button>
+        </div>
+        
+        <footer style="text-align: center; padding: 2rem; margin-top: 2rem; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.05); width: 100%;">
+            Diseñado y desarrollado por <strong style="color: var(--primary);">Juan Sotelo Aguilar</strong><br>
+            <div style="margin-top: 0.75rem; display: flex; justify-content: center; gap: 1rem;">
+                <a href="https://github.com/Juansotag" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s;" onmouseover="this.style.color='var(--text-main)'" onmouseout="this.style.color='var(--text-muted)'">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/juan-diego-sotelo-aguilar-b421741a3/" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s;" onmouseover="this.style.color='#0a66c2'" onmouseout="this.style.color='var(--text-muted)'">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    LinkedIn
+                </a>
+                <a href="https://x.com/JuanSoteloAgui2" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s;" onmouseover="this.style.color='var(--text-main)'" onmouseout="this.style.color='var(--text-muted)'">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    X (Twitter)
+                </a>
+                <a href="https://sites.google.com/view/juan-diego-sotelo-aguilar/inicio" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-muted)'">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm1 22.09c-3.136-.316-6.002-1.922-7.854-4.298 1.412-1.579 2.502-3.488 3.14-5.637l.088-.309c.075-.27.42-.315.655-.152l3.411 1.761.64.041c1.077 1.077 1.637 2.668 1.488 4.316l-.281 3.528c-.019.24.156.452.395.452h.828c.319 0 .524.321.391.603l-.439.924c-.161.341-.308.688-.431 1.042-.665.234-1.354.409-2.062.518v-1.789zm-2-1.305v1.233c-.332-.016-.663-.049-.99-.098-.382.164-.783.313-1.191.439.467-1.076.711-2.222.755-3.328l-.518.239c-.198.092-.41.139-.625.139h-1.628c-.461 0-.895-.246-1.127-.643l-1.325-2.261h-2.152c-.672 0-1.298-.352-1.646-.924l-2.003-3.267c1.378-5.395 5.864-9.52 11.396-10.426.68.804 1.189 1.748 1.47 2.766l.322 1.163c.121.437.525.733.978.733h.649c2.316 0 4.195 1.879 4.195 4.195v1.026c0 1.258-1.02 2.278-2.278 2.278h-.272c-.886 0-1.666.565-1.936 1.411l-.816 2.569c-.244.767-1.108 1.144-1.849.805l-1.746-.798z"/></svg>
+                    Portafolio
+                </a>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
