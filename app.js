@@ -155,16 +155,16 @@ async function captureAndDownload() {
 }
 
 function getShareText(top3) {
-    const names = top3.slice(0, 3).map((c, i) => `${MEDALS[i]} ${c.name} (${c.percentage}%)`).join(' ');
-    const siteUrl = 'https://test-dilema-production.up.railway.app/';
+    const names = top3.slice(0, 3).map((c, i) => `${MEDALS[i]} ${c.name} (${c.percentage}%)`).join('\n');
+    const siteUrl = 'https://juansotag.github.io/Test_9ejesColombia/';
     return userName
-        ? `${userName} hizo el Test 9 Ejes Colombia 🗳️\n\nSus candidatos con mayor afinidad son:\n${names}\n\n¿Cuál es el tuyo? ${siteUrl}`
-        : `Hice el Test 9 Ejes Colombia 🗳️\n\nMis candidatos con mayor afinidad:\n${names}\n\n¿Cuál es el tuyo? ${siteUrl}`;
+        ? `${userName} hizo el Test Político 9 Ejes Colombia 🇨🇴📊\n\nSus valores electorales se alinean con:\n${names}\n\n¡Anímate a descubrir tu perfil ideológico y candidatos afines con datos aquí! 👇\n${siteUrl}`
+        : `¡Acabo de hacer el Test Político 9 Ejes Colombia! 🇨🇴📊\n\nMis valores electorales se alinean con:\n${names}\n\n¡Anímate a descubrir tu perfil ideológico y candidatos afines con datos aquí! 👇\n${siteUrl}`;
 }
 
 async function shareToPlatform(platform, top3) {
     const text = getShareText(top3);
-    const siteUrl = 'https://test-dilema-production.up.railway.app/';
+    const siteUrl = 'https://juansotag.github.io/Test_9ejesColombia/';
 
     // Si estamos en un dispositivo móvil con Web Share API, es la forma nativa de enviar la imagen directamente a la app.
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -193,13 +193,13 @@ async function shareToPlatform(platform, top3) {
     }
 
     // Comportamiento Desktop (o si Web Share no soporta archivos):
-    // Como las páginas web no pueden adjuntar imágenes a URLs de Twitter/Facebook, descargamos la imagen primero.
+    // Como las páginas web no pueden adjuntar imágenes a URLs de Twitter/Facebook automáticamente.
     if (platform === 'native') {
         captureAndDownload();
         setTimeout(() => {
-            alert("Tu imagen de resultados ha sido descargada. Compártela con tus amigos.");
+            alert("✅ Tu imagen de resultados ha sido descargada. Compártela con tus amigos.");
             if (navigator.share) {
-                navigator.share({ title: 'Test 9 Ejes Colombia', text: '¿Cuál es tu candidato?', url: siteUrl }).catch(() => { });
+                navigator.share({ title: 'Test 9 Ejes Colombia', text: text, url: siteUrl }).catch(() => { });
             }
         }, 500);
         return;
@@ -207,6 +207,14 @@ async function shareToPlatform(platform, top3) {
 
     try {
         await captureAndDownload();
+        
+        // Intentar copiar el texto al portapapeles
+        try {
+            await navigator.clipboard.writeText(text);
+        } catch (e) {
+            console.warn("Clipboard API no disponible", e);
+        }
+
         let url = '';
 
         if (platform === 'twitter') {
@@ -217,14 +225,14 @@ async function shareToPlatform(platform, top3) {
             url = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
         } else if (platform === 'instagram') {
             setTimeout(() => {
-                alert("Tu imagen de resultados ha sido descargada.\n\nSúbela a tu perfil o historia de Instagram.");
+                alert("✅ Tu imagen de resultados ha sido descargada.\n✅ El texto sugerido fue copiado a tu portapapeles.\n\nSúbela a tu historia o post de Instagram y pega el texto 🎉");
             }, 600);
             return;
         }
 
         if (url) {
             setTimeout(() => {
-                const proceed = confirm(`Tu imagen ha sido descargada.\n\nAl continuar se abrirá ${platform}. ¡Asegúrate de adjuntar la imagen descargada a tu publicación!`);
+                const proceed = confirm(`✅ Tu imagen ha sido descargada en tu dispositivo.\n✅ El texto fue opcionalmente copiado a tu portapapeles.\n\nAl continuar se abrirá ${platform.toUpperCase()}.\n¡Asegúrate de adjuntar la foto descargada y pegar el texto en tu publicación!`);
                 if (proceed) {
                     window.open(url, '_blank', 'noopener');
                 }
